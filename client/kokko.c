@@ -39,7 +39,7 @@
 #include "crypto-ops.h"
 #include "keccak.h"
 #include "limits-xmr.h"
-#include "stream.h"
+#include "trezor-xmr/shared/stream.h"
 #include "key_exchange.h"
 #include "random.h"
 #include "log.h"

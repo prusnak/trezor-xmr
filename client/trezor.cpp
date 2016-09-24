@@ -32,7 +32,7 @@
 #include "kokko.h"
 
 #include "crypto-xmr.h"
-#include "stream.h"
+#include "trezor-xmr/shared/stream.h"
 #include <string.h>
 #include "profile_tools.h"
 #include "log.h"

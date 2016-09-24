@@ -52,7 +52,7 @@
 #include "crypto-xmr.h"
 
 #include "hash-ops.h"
-#include "stream.h"
+#include "trezor-xmr/shared/stream.h"
 #include "kokko.h"
 #include "profile_tools.h"
 

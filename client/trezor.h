@@ -3,7 +3,7 @@
 
 #include "cryptonote_core/account.h"
 #include "cryptonote_core/cryptonote_format_utils.h"
-#include "stream.h"
+#include "trezor-xmr/shared/stream.h"
 #include "kokko.h"
 
 namespace kokko
