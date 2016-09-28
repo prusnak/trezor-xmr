@@ -167,12 +167,15 @@ bool trezor::get_account(bool display, cryptonote::account_keys &account, uint32
 
 		if(has_password_protection())
 		{
-			trezor::m_password = password;
-			wire_set_passphrase_function(trezor::passphrase_function);
-		}
-		else
-		{
-			wire_set_passphrase_function(m_default_passphrase_function);
+			if(password.empty())
+			{
+				wire_set_passphrase_function(m_default_passphrase_function);
+			}
+			else
+			{
+				trezor::m_password = password;
+				wire_set_passphrase_function(trezor::passphrase_function);
+			}
 		}
 
 		if(!initialize())
