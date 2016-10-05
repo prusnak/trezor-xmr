@@ -315,7 +315,7 @@ bool recover_mnemonic(int argc, char *argv[])
 	xmr_seckey viewkey;
 	// get keys
 	xmr_generate_keys_from_seed(node.private_key, sizeof(node.private_key),
-			has_passphrase ? passphrase : nullptr,	&viewkey, &spendkey, nullptr);
+			nullptr, &viewkey, &spendkey, nullptr);
 
 	xmr_address address;
 	xmr_generate_keys(&address.spendkey, &spendkey, &spendkey, true);

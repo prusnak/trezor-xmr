@@ -403,26 +403,24 @@ void xmr_generate_keys_from_seed(const uint8_t *seed, size_t seedlen, const char
 
     // TODO: This is just reworking the node::private_key into a spendkey.
     // Can be modified or replaced altogether.
-    if(passphrase != NULL)
+    if(passphrase != NULL && strlen(passphrase))
     {
     	// Note: setting a passphrase for each node is allowed
         // 2. seed || passphrase -> seed64
-        uint8_t salt[8 + 256 + 4];
-        memset(salt, 0, sizeof(salt));
-        memcpy(salt, "vsmothra", 8);
-        size_t saltlen = strlen((char *)salt);
-        if (passphrase != NULL)
-        {
-            memcpy(salt + 8, passphrase, saltlen);
-            saltlen += strlen(passphrase);
-        }
-        	
     	PBKDF2_HMAC_SHA512_CTX pctx;
 		pbkdf2_hmac_sha512_Init(&pctx, (const uint8_t *)seed32, sizeof(seed32), (const uint8_t *) "vsmothra", 8);
-		progress_callback(0, BIP39_PBKDF2_ROUNDS);
-		for (int i = 0; i < 8; i++) {
+		if(progress_callback)
+        {
+			progress_callback(0, BIP39_PBKDF2_ROUNDS);
+        }
+        	
+		for (int i = 0; i < 8; i++)
+		{
 			pbkdf2_hmac_sha512_Update(&pctx, BIP39_PBKDF2_ROUNDS / 8);
-			progress_callback((i + 1) * BIP39_PBKDF2_ROUNDS / 8, BIP39_PBKDF2_ROUNDS);
+			if(progress_callback)
+			{
+				progress_callback((i + 1) * BIP39_PBKDF2_ROUNDS / 8, BIP39_PBKDF2_ROUNDS);
+			}
 		}
 		pbkdf2_hmac_sha512_Final(&pctx, seed64);
 		
